@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { useLocation } from 'react-router-dom';
 
-function MoodHeatmap() {
+function MoodHeatmap({ onClose }) { // Accept onClose prop
   const [filter, setFilter] = useState("Weekly");
-  const location = useLocation();
-  const showBackButton = location.pathname === "/mood-heatmap";
 
   const moodData = {
     Weekly: [
@@ -142,19 +139,11 @@ function MoodHeatmap() {
   };
 
   return (
-    <div className="mood-heatmap-container">
-      {showBackButton && (
-        <button
-          onClick={() => (window.location.href = '/')}
-          className="mb-4 text-white bg-blue-600 px-4 py-1 rounded hover:bg-blue-700"
-        >
-          ← Back to Home
-        </button>
-      )}
-      <div className="mood-heatmap-header">
-        <h2 className="mood-heatmap-title">Mood Heatmap</h2>
+    <div className="bg-white text-black rounded-xl p-6 shadow-lg w-full mx-auto">
+      <div className="flex justify-between items-center mb-6 text-center">
+        <h2 className="text-3xl font-bold">Mood Heatmap</h2>
         <select
-          className="mood-heatmap-select"
+          className="p-2 rounded-md text-base bg-gray-100 text-gray-900 border border-gray-300"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
         >
@@ -163,114 +152,20 @@ function MoodHeatmap() {
         </select>
       </div>
 
-      <div className="mood-scroll-wrapper">
-        <div className="mood-row">
+      <div className="overflow-x-auto pb-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {moodData[filter].map((data, index) => (
-            <div className="mood-card" key={index}>
-              <div className="mood-emoji">{data.emoji}</div>
-              <div className="mood-city">{data.city}</div>
-              <div className="mood-percentage">{data.percentage}% Positive</div>
-              <div className="mood-change">{data.change}</div>
-              <div className="mood-source">{data.source}</div>
-              <div className="mood-tagline">{data.tagline}</div>
+            <div className="bg-white rounded-xl p-5 shadow-md flex flex-col justify-start relative" key={index}>
+              <div className="absolute top-4 right-4 text-2xl">{data.emoji}</div>
+              <div className="text-xl font-semibold mb-2">{data.city}</div>
+              <div className="text-2xl font-bold text-indigo-600 mb-1">{data.percentage}% Positive</div>
+              <div className="text-green-600 text-sm mb-1">{data.change}</div>
+              <div className="text-sm text-gray-600 mb-2">{data.source}</div>
+              <div className="text-base text-gray-700 font-medium">{data.tagline}</div>
             </div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        .mood-heatmap-container {
-          background-color: white;
-          color: black;
-          border-radius: 1rem;
-          padding: 1.5rem;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          width: 85%;
-          margin: 2rem auto;
-        }
-
-        .mood-heatmap-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1.5rem;
-          text-align: center;
-        }
-
-        .mood-heatmap-title {
-          font-size: 2rem;
-          font-weight: bold;
-        }
-
-        .mood-heatmap-select {
-          padding: 0.4rem 0.75rem;
-          border-radius: 0.4rem;
-          font-size: 1rem;
-          background: #f1f5f9;
-          color: #0f172a;
-          border: 1px solid #cbd5e1;
-        }
-
-        .mood-scroll-wrapper {
-          overflow-x: auto;
-          padding-bottom: 0.5rem;
-        }
-
-        .mood-row {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .mood-card {
-          background-color: #ffffff;
-          border-radius: 1rem;
-          padding: 1.25rem;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          position: relative;
-        }
-
-        .mood-emoji {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          font-size: 1.5rem;
-        }
-
-        .mood-city {
-          font-size: 1.3rem;
-          font-weight: 600;
-          margin-bottom: 0.5rem;
-        }
-
-        .mood-percentage {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: #4f46e5;
-          margin-bottom: 0.25rem;
-        }
-
-        .mood-change {
-          color: green;
-          font-size: 0.9rem;
-          margin-bottom: 0.25rem;
-        }
-
-        .mood-source {
-          font-size: 0.85rem;
-          color: #475569;
-          margin-bottom: 0.5rem;
-        }
-
-        .mood-tagline {
-          font-size: 0.95rem;
-          color: #334155;
-          font-weight: 500;
-        }
-      `}</style>
     </div>
   );
 }
