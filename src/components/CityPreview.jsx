@@ -87,6 +87,7 @@ function CityPreview({ onFeedbackSubmit }) {
           font-size: 2rem;
           font-weight: bold;
           margin-bottom: 1rem;
+          color: black;
         }
         .city-grid {
           display: grid;
@@ -350,15 +351,9 @@ function CityPreview({ onFeedbackSubmit }) {
     .filter-section {
       width: 100%;
       background-color: #f8fafc;
-      padding: 0.75rem 0.5rem;
-      margin-top: 0rem;
+      padding: 1rem 0.5rem;
+      margin-top: 1rem;
     }
-      .section-title {
-          font-size: 2rem;
-          font-weight: bold;
-          margin-bottom: 1rem;
-          color: black; /* Add this line */
-        }
 
     .filter-toolbar {
       display: flex;
@@ -434,11 +429,6 @@ function CityPreview({ onFeedbackSubmit }) {
       .filter-button {
         width: 100%;
       }
-        .container {
-  margin: 1rem auto; /* reduced from 2rem */
-  padding: 0 1rem;
-}
-
     }
   `}</style>
 </section>

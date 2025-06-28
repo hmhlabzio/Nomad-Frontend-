@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { useLocation } from 'react-router-dom';
 
-function CostForecaster() {
+function CostForecaster({ onClose }) { // Accepts onClose prop
   const [days, setDays] = useState(5);
   const [showFees, setShowFees] = useState(false);
   const [place, setPlace] = useState("Bali");
-  const location = useLocation();
-  const showBackButton = location.pathname === "/cost-calculator";
 
   const baseRates = {
     Bali: 1200,
@@ -27,157 +24,22 @@ function CostForecaster() {
   ];
 
   return (
-    <div className="cost-container">
-      <style>{`
-        .cost-container {
-          background: linear-gradient(to right, #e0f7fa, #ffffff);
-          color: #1f2937;
-          border-radius: 1.5rem;
-          padding: 2rem;
-          width: 85%;
-          max-width: 800px;
-          margin: 2rem auto;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-          font-family: 'Segoe UI', sans-serif;
-        }
+    // Outer container for the component's content when displayed in a modal
+    <div className="
+      bg-gradient-to-r from-cyan-50 to-white
+      text-gray-800 rounded-2xl p-8 w-full max-w-4xl
+      mx-auto shadow-xl font-sans max-h-[85vh] overflow-y-auto
+    ">
+      <div className="flex flex-col gap-6">
+        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Cost Forecaster</h2>
 
-        .title {
-          font-size: 2rem;
-          font-weight: 700;
-          text-align: center;
-          margin-bottom: 1.5rem;
-          color: #0f172a;
-        }
-
-        .scroll-area {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
-        .dropdown-section,
-        .slider-box,
-        .toggle-box {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .label {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: #1e293b;
-        }
-
-        .select,
-        .slider,
-        .checkbox {
-          margin-left: 1rem;
-        }
-
-        .select {
-          font-size: 1rem;
-          padding: 0.5rem;
-          border-radius: 0.5rem;
-          border: 1px solid #cbd5e1;
-          background-color: #f9fafb;
-        }
-
-        .slider {
-          width: 60%;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-          background-color: #3b82f6;
-          border: none;
-        }
-
-        .checkbox {
-          width: 20px;
-          height: 20px;
-        }
-
-        .cost-breakdown {
-          background-color: #f8fafc;
-          border: 1px solid #e2e8f0;
-          border-radius: 1rem;
-          padding: 1rem;
-          margin-top: 1rem;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .cost-breakdown p {
-          display: flex;
-          justify-content: space-between;
-          font-size: 1.1rem;
-          margin: 0.5rem 0;
-        }
-
-        .total-cost {
-          font-weight: bold;
-          font-size: 1.25rem;
-          color: #2563eb;
-        }
-
-        .tips-section {
-          margin-top: 2rem;
-          background-color: #ecfdf5;
-          border-left: 4px solid #10b981;
-          padding: 1rem 1.25rem;
-          border-radius: 0.75rem;
-        }
-
-        .tips-section h3 {
-          font-size: 1.2rem;
-          font-weight: 700;
-          margin-bottom: 0.75rem;
-          color: #065f46;
-        }
-
-        .tips-section ul {
-          padding-left: 1.25rem;
-        }
-
-        .tips-section li {
-          font-size: 1rem;
-          margin-bottom: 0.4rem;
-          color: #065f46;
-        }
-
-        .back-button {
-          margin-bottom: 1rem;
-          background-color: #3b82f6;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 0.5rem;
-          font-weight: 500;
-          border: none;
-          cursor: pointer;
-        }
-
-        .back-button:hover {
-          background-color: #2563eb;
-        }
-      `}</style>
-
-      {showBackButton && (
-        <button
-          onClick={() => (window.location.href = '/')}
-          className="back-button"
-        >
-          ← Back to Home
-        </button>
-      )}
-
-      <div className="scroll-area">
-        <h2 className="title">Cost Forecaster</h2>
-
-        <div className="dropdown-section">
-          <label className="label">Place:</label>
+        {/* Place Dropdown */}
+        <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
+          <label className="text-lg font-semibold text-gray-800">Place:</label>
           <select
             value={place}
             onChange={(e) => setPlace(e.target.value)}
-            className="select"
+            className="text-lg p-2 rounded-lg border border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
           >
             {Object.keys(baseRates).map((p) => (
               <option key={p} value={p}>
@@ -187,47 +49,54 @@ function CostForecaster() {
           </select>
         </div>
 
-        <div className="slider-box">
-          <label className="label">Days: {days}</label>
+        {/* Days Slider */}
+        <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
+          <label className="text-lg font-semibold text-gray-800">Days: <span className="font-bold text-blue-600">{days}</span></label>
           <input
             type="range"
             min="1"
             max="30"
             value={days}
             onChange={(e) => setDays(parseInt(e.target.value))}
-            className="slider"
+            className="w-3/5 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer
+                       [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:shadow
+                       [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-blue-600 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:shadow
+            "
           />
         </div>
 
-        <div className="toggle-box">
-          <label className="label">Show hidden fees:</label>
+        {/* Hidden Fees Toggle */}
+        <div className="flex justify-between items-center bg-white p-4 rounded-lg shadow-sm">
+          <label className="text-lg font-semibold text-gray-800">Show hidden fees:</label>
           <input
             type="checkbox"
             checked={showFees}
             onChange={(e) => setShowFees(e.target.checked)}
-            className="checkbox"
+            className="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer"
           />
         </div>
 
-        <div className="cost-breakdown">
-          <p>
-            <span>Base Cost:</span> <span>${baseCost}</span>
+        {/* Cost Breakdown */}
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-4 shadow-md">
+          <p className="flex justify-between text-lg mb-3">
+            <span className="text-gray-700">Base Cost:</span> <span className="font-medium text-gray-900">${baseCost}</span>
           </p>
           {showFees && (
-            <p>
-              <span>Hidden Fee:</span> <span>${hiddenFee}</span>
+            <p className="flex justify-between text-lg mb-3">
+              <span className="text-gray-700">Hidden Fee:</span> <span className="font-medium text-gray-900">${hiddenFee}</span>
             </p>
           )}
-          <p className="total-cost">
+          <p className="flex justify-between font-bold text-3xl text-blue-700 pt-4 border-t-2 border-blue-200 mt-4">
             <span>Total Cost:</span> <span>${totalCost}</span>
           </p>
         </div>
 
-        <div className="tips-section">
-          <h3>Cost Saving Tips</h3>
-          <ul>
+        {/* Tips Section */}
+        <div className="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-lg mt-8 shadow-sm">
+          <h3 className="text-xl font-bold text-emerald-800 mb-3">Cost Saving Tips</h3>
+          <ul className="list-disc pl-5 space-y-1 text-emerald-700">
             {tips.map((tip, index) => (
-              <li key={index}>{tip}</li>
+              <li key={index} className="text-base">{tip}</li>
             ))}
           </ul>
         </div>
