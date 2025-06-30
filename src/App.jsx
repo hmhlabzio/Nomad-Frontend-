@@ -1,14 +1,9 @@
-// START OF FILE: src/App.jsx
-
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 
-// Import the background image
-import bannerImage from './assets/banner.jpg'; // <--- IMPORTANT: Make sure this path is correct!
-
-// Import all necessary components
 import Hero from "./components/Hero";
 import CityPreview from "./components/CityPreview";
+import { LifestyleMeter } from "./components/LifestyleMeter";
 import SparkHeader from './components/SparkHeader';
 import Footer from './components/Footer';
 import CostForecaster from './components/CostForecaster';
@@ -21,11 +16,6 @@ import InsightsPage from './components/InsightsPage';
 function App() {
   const [showContactForm, setShowContactForm] = useState(false);
   const [showBrowseForm, setShowBrowseForm] = useState(false);
-  const [showSafetyScorePopup, setShowSafetyScorePopup] = useState(false);
-  const [showMoodHeatmapPopup, setShowMoodHeatmapPopup] = useState(false);
-  const [showCostForecasterPopup, setShowCostForecasterPopup] = useState(false);
-  const [showExploreWorldPopup, setShowExploreWorldPopup] = useState(false);
-
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -35,6 +25,7 @@ function App() {
   });
   const [formErrors, setFormErrors] = useState({});
 
+  // Form validation logic (remains in App)
   const validateForm = () => {
     const errors = {};
     if (!formData.fullName.trim()) errors.fullName = 'Full Name is required';
@@ -73,85 +64,66 @@ function App() {
     }, 3000);
   };
 
-  // HomeView component to handle routing specific logic for the homepage
+  // Define HomeView component directly inside App
+  // This component will contain the logic that needs useLocation/useRef
   const HomeView = () => {
-    const location = useLocation();
+    const location = useLocation(); // Now correctly used within a component
     const popularCitiesRef = useRef(null);
 
+    // Dummy feedback handler for CityPreview.
     const handleFeedbackSubmit = (feedback) => {
       console.log("Feedback submitted:", feedback);
+      // You would typically handle feedback data here, e.g., send to a server or update state.
     };
 
-    // Effect to scroll to popular cities if the route is '/' on navigation
+    // Effect to scroll to popular cities if state indicates it (from AboutUsPage button)
     useEffect(() => {
-      if (location.pathname === '/') {
-        // Use a small timeout to ensure elements are rendered before scrolling
-        const timer = setTimeout(() => {
-          if (popularCitiesRef.current) {
-            popularCitiesRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 100); // Adjust delay if needed
-
-        return () => clearTimeout(timer); // Cleanup timeout
+      if (location.state && location.state.scrollToCities) {
+        if (popularCitiesRef.current) {
+          popularCitiesRef.current.scrollIntoView({ behavior: 'smooth' });
+          // Optionally, clear the state to prevent re-scrolling on subsequent visits
+          // navigate(location.pathname, { replace: true, state: {} }); // Requires useNavigate here too
+        }
       }
-    }, [location.pathname]); // Re-run when pathname changes
+    }, [location]);
 
     return (
       <>
+        <Hero />
+        {/* Added a div with ref and ID for scrolling target */}
         <div id="popular-cities" ref={popularCitiesRef}>
           <CityPreview onFeedbackSubmit={handleFeedbackSubmit} />
         </div>
+        <LifestyleMeter />
       </>
     );
   };
 
   return (
-    <Router>
-      <div className="bg-white text-black min-h-screen flex flex-col">
-        {/* Wrapper for Header and Hero with Background Image */}
-        <div
-          className="relative w-full overflow-hidden flex flex-col"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${bannerImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            minHeight: '80vh', // Adjust this height as needed for your banner area
-          }}
-        >
-          <SparkHeader
-            onContactClick={() => setShowContactForm(true)}
-            onBrowseClick={() => setShowBrowseForm(true)}
-          />
-          <Hero />
-        </div>
-
-        {/* Main content area starts after the header+hero banner */}
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomeView />} />
-            <Route path="/insights" element={<InsightsPage />} />
-            <Route path="/about-us" element={<AboutUsPage />} />
-          </Routes>
-        </main>
-
-        {/* Footer component */}
-        <Footer
+    <Router> {/* BrowserRouter remains in App.jsx */}
+      <div className="bg-white text-white min-h-screen flex flex-col items-center">
+        <SparkHeader
           onContactClick={() => setShowContactForm(true)}
-          onSafetyScoreClick={() => setShowSafetyScorePopup(true)}
-          onMoodHeatmapClick={() => setShowMoodHeatmapPopup(true)}
-          onCostCalculatorClick={() => setShowCostForecasterPopup(true)}
-          onExploreWorldClick={() => setShowExploreWorldPopup(true)}
+          onBrowseClick={() => setShowBrowseForm(true)}
         />
 
-        {/* ======================================= */}
-        {/* ALL POPUP MODALS (Conditionally rendered based on state) */}
-        {/* ======================================= */}
+        <Routes>
+          {/* Use the new HomeView component for the main route */}
+          <Route path="/" element={<HomeView />} />
+          <Route path="/insights" element={<InsightsPage />} />
+          <Route path="/mood-heatmap" element={<MoodHeatmap />} />
+          <Route path="/safety-score" element={<SafetyTrustScore />} />
+          <Route path="/cost-calculator" element={<CostForecaster />} />
+          <Route path="/explore-world" element={<ExploreWorld />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
+        </Routes>
+
+        <Footer onContactClick={() => setShowContactForm(true)} />
 
         {/* Contact Form Popup */}
         {showContactForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-white text-black p-6 rounded-md w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50">
+            <div className="bg-white text-black p-6 rounded-md w-full max-w-md relative">
               <button
                 className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
                 onClick={() => setShowContactForm(false)}
@@ -214,8 +186,8 @@ function App() {
 
         {/* Browse Country Form Popup */}
         {showBrowseForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-white text-black p-6 rounded-md w-full max-w-2xl relative max-h-[90vh] overflow-y-auto">
+          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50">
+            <div className="bg-white text-black p-6 rounded-md w-full max-w-2xl relative">
               <button
                 className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
                 onClick={() => setShowBrowseForm(false)}
@@ -227,10 +199,9 @@ function App() {
                 <div>
                   <label className="block mb-1">Country Name</label>
                   <select className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-black">
-                    <option value="">Select a country</option>
-                    <option value="Tokyo">Tokyo</option>
-                    <option value="Bali">Bali</option>
-                    <option value="Paris">Paris</option>
+                    <option>Tokyo</option>
+                    <option>Bali</option>
+                    <option>Paris</option>
                   </select>
                 </div>
                 <div>
@@ -240,47 +211,43 @@ function App() {
                 <div>
                   <label className="block mb-1">Season / Weather Preference</label>
                   <select className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-black">
-                    <option value="">Select a season</option>
-                    <option value="Summer">Summer</option>
-                    <option value="Winter">Winter</option>
-                    <option value="Rainy">Rainy</option>
+                    <option>Summer</option>
+                    <option>Winter</option>
+                    <option>Rainy</option>
                   </select>
                 </div>
                 <div>
                   <label className="block mb-1">Budget Range</label>
                   <select className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-black">
-                    <option value="">Select a budget</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
                   </select>
                 </div>
                 <div>
                   <label className="block mb-1">Travel Type</label>
                   <select className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-black">
-                    <option value="">Select travel type</option>
-                    <option value="Solo">Solo</option>
-                    <option value="Couple">Couple</option>
-                    <option value="Family">Family</option>
-                    <option value="Group">Group</option>
+                    <option>Solo</option>
+                    <option>Couple</option>
+                    <option>Family</option>
+                    <option>Group</option>
                   </select>
                 </div>
                 <div>
                   <label className="block mb-1">Popular Activities</label>
                   <div className="space-y-1">
-                    <label className="block"><input type="checkbox" className="mr-2" /> Adventure</label>
-                    <label className="block"><input type="checkbox" className="mr-2" /> Sightseeing</label>
-                    <label className="block"><input type="checkbox" className="mr-2" /> Relaxation</label>
-                    <label className="block"><input type="checkbox" className="mr-2" /> Wildlife</label>
+                    <label><input type="checkbox" className="mr-2" /> Adventure</label><br />
+                    <label><input type="checkbox" className="mr-2" /> Sightseeing</label><br />
+                    <label><input type="checkbox" className="mr-2" /> Relaxation</label><br />
+                    <label><input type="checkbox" className="mr-2" /> Wildlife</label>
                   </div>
                 </div>
                 <div>
                   <label className="block mb-1">Preferred Continent</label>
                   <select className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-black">
-                    <option value="">Select a continent</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="America">America</option>
+                    <option>Asia</option>
+                    <option>Europe</option>
+                    <option>America</option>
                   </select>
                 </div>
               </form>
@@ -292,71 +259,9 @@ function App() {
             </div>
           </div>
         )}
-
-        {/* Safety Score Popup */}
-        {showSafetyScorePopup && (
-          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-white text-black p-6 rounded-md w-full max-w-4xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowSafetyScorePopup(false)}
-              >
-                &times;
-              </button>
-              <SafetyTrustScore onClose={() => setShowSafetyScorePopup(false)} />
-            </div>
-          </div>
-        )}
-
-        {/* Mood Heatmap Popup */}
-        {showMoodHeatmapPopup && (
-          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-white text-black p-6 rounded-md w-full max-w-5xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowMoodHeatmapPopup(false)}
-              >
-                &times;
-              </button>
-              <MoodHeatmap onClose={() => setShowMoodHeatmapPopup(false)} />
-            </div>
-          </div>
-        )}
-
-        {/* Cost Forecaster Popup */}
-        {showCostForecasterPopup && (
-          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-white text-black p-6 rounded-md w-full max-w-4xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowCostForecasterPopup(false)}
-              >
-                &times;
-              </button>
-              <CostForecaster onClose={() => setShowCostForecasterPopup(false)} />
-            </div>
-          </div>
-        )}
-
-        {/* Explore World Popup */}
-        {showExploreWorldPopup && (
-          <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-            <div className="bg-white text-black p-6 rounded-md w-full max-w-7xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowExploreWorldPopup(false)}
-              >
-                &times;
-              </button>
-              <ExploreWorld onClose={() => setShowExploreWorldPopup(false)} />
-            </div>
-          </div>
-        )}
       </div>
     </Router>
   );
 }
 
 export default App;
-
-// END OF FILE: src/App.jsx
