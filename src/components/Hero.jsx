@@ -91,4 +91,3 @@ function Hero() {
 
 export default Hero;
 
-// END OF FILE: src/components/Hero.jsx
