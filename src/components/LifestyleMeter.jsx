@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Radar,
   RadarChart,
@@ -9,15 +10,7 @@ import {
 } from 'recharts';
 import styled from 'styled-components';
 
-const lifestyleData = [
-  { metric: 'Internet', score: 89, icon: '🚀', color: '#FF6B6B', basis: 'Blazing fast 89 Mbps average' },
-  { metric: 'Safety', score: 82, icon: '🛡️', color: '#4ECDC4', basis: 'Very safe with 24/7 patrols' },
-  { metric: 'Nightlife', score: 83, icon: '🍹', color: '#FF9F1C', basis: '100+ bars & clubs rated 4.5★+' },
-  { metric: 'Wellness', score: 74, icon: '🧘', color: '#A78BFA', basis: '50+ yoga studios & spas' },
-  { metric: 'Cost', score: 91, icon: '💰', color: '#2ECC71', basis: 'Only $1,200/month avg cost' },
-  { metric: 'Community', score: 66, icon: '👥', color: '#F9C74F', basis: 'Growing expat community' },
-];
-
+// Styled Components
 const Container = styled.div`
   padding: 2.5rem;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -61,65 +54,6 @@ const ChartContainer = styled.div`
   position: relative;
 `;
 
-const ScoreContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
-`;
-
-const ScoreCard = styled.div`
-  padding: 1.5rem;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: 1px solid rgba(0,0,0,0.03);
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(108, 92, 231, 0.15);
-  }
-`;
-
-const ScoreHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.8rem;
-`;
-
-const MetricIcon = styled.span`
-  font-size: 1.8rem;
-`;
-
-const ScoreValue = styled.div`
-  font-size: 2.5rem;
-  font-weight: 800;
-  background: linear-gradient(90deg, #6c5ce7, #a78bfa);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  line-height: 1;
-`;
-
-const ScoreLabel = styled.div`
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #2d3436;
-  margin: 0.5rem 0;
-`;
-
-const ScoreBasis = styled.div`
-  font-size: 0.85rem;
-  color: #636e72;
-  text-align: center;
-  line-height: 1.4;
-`;
-
 const PulseCircle = styled.div`
   position: absolute;
   width: 300px;
@@ -132,7 +66,43 @@ const PulseCircle = styled.div`
   z-index: 0;
 `;
 
+const CitySelector = styled.select`
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #dcdde1;
+  background: white;
+  color: #2d3436;
+  font-weight: 500;
+`;
+
 export const LifestyleMeter = () => {
+  const [lifestyleData, setLifestyleData] = useState([]);
+  const [city, setCity] = useState('Tokyo');
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/lifestyle?city=${city}`)
+      .then((res) => {
+        const raw = res.data;
+
+        const formatted = [
+          { metric: 'Internet', score: raw.internet },
+          { metric: 'Safety', score: raw.safety },
+          { metric: 'Nightlife', score: raw.nightlife },
+          { metric: 'Wellness', score: raw.mental_wellness },
+          { metric: 'Cost', score: raw.cost },
+          { metric: 'Community', score: raw.community },
+        ];
+
+        setLifestyleData(formatted);
+      })
+      .catch((err) => {
+        console.error('Error fetching lifestyle data:', err);
+      });
+  }, [city]);
+
   return (
     <Container>
       <Header>
@@ -141,6 +111,11 @@ export const LifestyleMeter = () => {
           Our vibrant rating system evaluates what truly matters for digital nomads - 
           combining hard data with community experiences
         </Subtitle>
+        <CitySelector value={city} onChange={(e) => setCity(e.target.value)}>
+          <option value="Tokyo">Tokyo</option>
+          <option value="Lisbon">Lisbon</option>
+          <option value="Bali">Bali</option>
+        </CitySelector>
       </Header>
 
       <ChartContainer>
@@ -178,19 +153,6 @@ export const LifestyleMeter = () => {
           </RadarChart>
         </ResponsiveContainer>
       </ChartContainer>
-
-      <ScoreContainer>
-        {lifestyleData.map((item) => (
-          <ScoreCard key={item.metric} style={{ borderTop: `4px solid ${item.color}` }}>
-            <ScoreHeader>
-              <MetricIcon>{item.icon}</MetricIcon>
-              <ScoreLabel>{item.metric}</ScoreLabel>
-            </ScoreHeader>
-            <ScoreValue>{item.score}</ScoreValue>
-            <ScoreBasis>{item.basis}</ScoreBasis>
-          </ScoreCard>
-        ))}
-      </ScoreContainer>
     </Container>
   );
 };

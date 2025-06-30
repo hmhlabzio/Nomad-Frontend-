@@ -1,0 +1,478 @@
+body, .city-details-container {
+  width: 100%;
+}
+
+.city-details-container {
+  color: #000000; /* Set default text color to black */
+}
+
+
+
+.hero-section {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  padding: 2rem;
+}
+.back-button {
+  position: absolute;
+  top: 4.5rem;
+  left: 2rem;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #cbd5e1;
+}
+
+.back-arrow {
+  margin-right: 6px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.hero-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+  position: absolute;
+  inset: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; 
+
+  justify-content: center;
+  gap: 2rem; 
+  margin-block:50px ;
+  width: 100%; 
+}
+
+
+.stat-box {
+  min-width: 300px;          
+  padding: 1rem;
+  background-color: #eae8e8;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.stat-box .icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-box h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.stat-box p {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.quality-cont {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  color: #000;
+  max-width: 700px;
+  margin: 2rem auto;
+  box-sizing: border-box;
+  border: solid 1px #d1cfcf;
+}
+
+.quality-cont h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.quality-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* LEFT SECTION */
+.cost-and-stats {
+  flex: 1;
+  min-width: 260px;
+}
+
+.monthly-cost h3 {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.monthly-cost span {
+  font-size: 1rem;
+  color: #666;
+}
+
+.monthly-cost p {
+  margin-top: 0.3rem;
+  color: #555;
+}
+
+.quick-stats {
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.stat {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.stat span {
+  margin-right: 0.4rem;
+}
+
+/* RIGHT SECTION */
+.rating-section {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+}
+
+.rating-label {
+  width: 100px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.rating-bar {
+  flex: 1;
+  height: 10px;
+  background-color: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.rating-bar .fill {
+  height: 100%;
+  border-radius: 10px;
+  background-color: #22c55e; /* fallback */
+  position: relative;
+  z-index: 1;
+  transition: width 0.3s ease-in-out;
+}
+
+.visa-overview {
+  max-width: 700px;       /* Adjust width as needed */
+  margin: 3rem auto;       /* This centers the box horizontally */
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: solid 1px #d1cfcf;
+
+}
+
+
+.visa-overview h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.visa-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.visa-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.visa-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.visa-section li {
+  margin: 0.5rem 0;
+  color: #374151;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.visa-section li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #60a5fa;
+}
+
+.visa-bottom-stats {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+}
+
+
+.stat-block h5 {
+  margin: 0;
+  font-weight: 600;
+  color: #111827;
+}
+
+.stat-block p {
+  margin: 0.2rem 0 0;
+  color: #4b5563;
+}
+.city-about {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  text-align: left;
+  border: solid 1px #d1cfcf;
+
+}
+
+.city-about h2.city-que {
+  font-size: 26px;
+  color: #111827;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.city-about p.city-ans1,
+.city-about p.city-ans2 {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+.inquiry-form-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-block: 3rem;
+  padding: 0 1rem;
+}
+
+.inquiry-form {
+  background: linear-gradient(135deg, #6b5bff, #5e35b1);
+  padding: 45px;
+  max-width: 750px;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.inquiry-form h2 {
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.inquiry-form p {
+  margin-bottom: 20px;
+}
+
+.inquiry-form .input-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.inquiry-form .input-row label {
+  flex: 1;
+  min-width: 200px;
+  display: block;
+  font-weight: bold;
+}
+
+.inquiry-form label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.inquiry-form input,
+.inquiry-form select,
+.inquiry-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #111827;
+  font-size: 14px;
+}
+
+.inquiry-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.inquiry-form button {
+  display: block;
+  margin: 20px auto 0; /* Top margin, auto for left/right centering, 0 for bottom */
+  padding: 12px 20px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.inquiry-form button:hover {
+  background-color: #4338ca;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .quality-grid {
+    flex-direction: column;
+  }
+
+  .visa-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .visa-bottom-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .rating-section {
+    width: 100%;
+  }
+
+  .stat-box {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .cost-and-stats {
+    width: 100%;
+  }
+
+  .inquiry-form {
+    padding: 25px;
+  }
+
+  .city-about {
+    padding: 1.5rem;
+  }
+
+  .quality-cont {
+    padding: 1.5rem;
+  }
+
+  .visa-overview {
+    padding: 1.5rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-content p {
+    font-size: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 0.9rem;
+  }
+
+  .monthly-cost h3 {
+    font-size: 1.5rem;
+  }
+  .quality-cont, .visa-overview{
+    border: none;
+    box-shadow: none;
+  }
+  .rating-label {
+    width: 90px;
+    font-size: 0.85rem;
+  }
+
+  .inquiry-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .inquiry-form button {
+    width: 100%;
+  }
+}
