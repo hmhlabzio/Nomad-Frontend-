@@ -4,24 +4,29 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import React, { useState, useEffect, useRef } from 'react';
 
 // Import the background image
-// <--- IMPORTANT: Make sure this path is correct for your downloaded image!
-import bannerImage from './assets/banner.jpg'; 
+import bannerImage from './assets/banner.jpg'; // Ensure this path is correct for your banner image
 
 // Import all necessary components
-import Hero from "./components/Hero";
-import CityPreview from "./components/CityPreview";
-import SparkHeader from './components/SparkHeader';
-import Footer from './components/Footer';
-import CostForecaster from './components/CostForecaster';
-import SafetyTrustScore from './components/SafetyScore';
-import MoodHeatmap from './components/MoodHeatmap';
-import ExploreWorld from './components/ExploreWorld';
+import Hero from "./components/Hero"; //
+import CityPreview from "./components/CityPreview"; //
+import SparkHeader from './components/SparkHeader'; //
+import Footer from './components/Footer'; //
+
+// Popup Components
+import CostForecaster from './components/CostForecaster'; //
+import SafetyScore from "./components/SafetyScore"; //
+import MoodHeatmap from "./components/MoodHeatmap"; //
+import ExploreWorld from "./components/ExploreWorld";
+
+// Page Components
 import AboutUsPage from './components/AboutUsPage';
-import InsightsPage from './components/InsightsPage';
+import InsightsPage from './components/InsightsPage'; // Keeping for potential insights page content, though not in header nav
 
 function App() {
   const [showContactForm, setShowContactForm] = useState(false);
-  const [showBrowseForm, setShowBrowseForm] = useState(false);
+  const [showBrowseForm, setShowBrowseForm] = useState(false); // This state exists, but Browse is removed from header
+
+  // State variables for Footer popups
   const [showSafetyScorePopup, setShowSafetyScorePopup] = useState(false);
   const [showMoodHeatmapPopup, setShowMoodHeatmapPopup] = useState(false);
   const [showCostForecasterPopup, setShowCostForecasterPopup] = useState(false);
@@ -74,26 +79,30 @@ function App() {
     }, 3000);
   };
 
+  // HomeView component to encapsulate home page specific content and logic (like auto-scroll)
   const HomeView = () => {
     const location = useLocation();
     const popularCitiesRef = useRef(null);
 
-    const handleFeedbackSubmit = (feedback) => {
-      console.log("Feedback submitted:", feedback);
-    };
-
+    // This useEffect handles the scroll-to-popular-cities functionality on home page load
     useEffect(() => {
-      if (location.state && location.state.scrollToCities) {
-        if (popularCitiesRef.current) {
-          popularCitiesRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
+      if (location.pathname === '/') {
+        const timer = setTimeout(() => {
+          if (popularCitiesRef.current) {
+            popularCitiesRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 200);
+
+        return () => clearTimeout(timer);
       }
-    }, [location]);
+    }, [location.pathname]);
 
     return (
       <>
+        {/* CityPreview is part of the Home page content below the Hero */}
         <div id="popular-cities" ref={popularCitiesRef}>
-          <CityPreview onFeedbackSubmit={handleFeedbackSubmit} />
+          {/* onFeedbackSubmit removed as it's not present in CityPreview component in current context */}
+          <CityPreview /> {/* */}
         </div>
       </>
     );
@@ -103,37 +112,45 @@ function App() {
     <Router>
       <div className="bg-white text-black min-h-screen flex flex-col">
         {/*
-          This wrapper div now creates the full banner area,
-          containing both the header and hero with the shared background.
+          CRITICAL: This div applies the background image and min-height ONLY to the Hero section on the Home page.
+          SparkHeader is placed within this div with absolute positioning to appear over the background.
         */}
         <div
           className="relative w-full overflow-hidden flex flex-col"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${bannerImage})`, // Added a subtle dark overlay for better text readability
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(${bannerImage})`, //
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            minHeight: '80vh', // Adjust this height for the combined banner area
+            minHeight: '80vh', // This height is for the Hero banner specifically
           }}
         >
-          {/* SparkHeader and Hero are children of this banner div */}
+          {/* SparkHeader is placed here. This ensures it's always rendered
+              at the very top of your application, regardless of the current route, and over the hero image.
+          */}
           <SparkHeader
             onContactClick={() => setShowContactForm(true)}
+            // onBrowseClick prop is still passed, but no longer directly used for a header link
             onBrowseClick={() => setShowBrowseForm(true)}
           />
-          <Hero />
+          <Hero /> {/* Hero is rendered within this background-image div */}
         </div>
 
-        {/* Main content area starts after the header+hero banner */}
+        {/* Main content area, where specific routes are rendered */}
         <main className="flex-grow">
           <Routes>
+            {/* Home Page Route: This is where CityPreview is rendered after the Hero */}
             <Route path="/" element={<HomeView />} />
-            <Route path="/insights" element={<InsightsPage />} />
+
+            {/* Other routes: These will NOT show the Hero section */}
             <Route path="/about-us" element={<AboutUsPage />} />
+            {/* Using InsightsPage component for "/contact" route as a placeholder.
+                You might want to create a dedicated ContactPage component. */}
+            <Route path="/contact" element={<InsightsPage />} />
           </Routes>
         </main>
 
-        {/* Footer component */}
+        {/* Footer component (always visible) */}
         <Footer
           onContactClick={() => setShowContactForm(true)}
           onSafetyScoreClick={() => setShowSafetyScorePopup(true)}
@@ -144,11 +161,13 @@ function App() {
 
         {/* ======================================= */}
         {/* ALL POPUP MODALS (Conditionally rendered based on state) */}
+        {/* Note: The close button is now handled INSIDE each popup component */}
         {/* ======================================= */}
 
         {showContactForm && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
             <div className="bg-white text-black p-6 rounded-md w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+              {/* Close button handled inside form */}
               <button
                 className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
                 onClick={() => setShowContactForm(false)}
@@ -209,7 +228,11 @@ function App() {
           </div>
         )}
 
-        {showBrowseForm && (
+        {/* Removed Browse Countries popup from the main view for simplicity,
+            but keeping the state and prop for future flexibility if needed.
+            If you need this popup, you'll need to uncomment its div.
+        */}
+        {/* {showBrowseForm && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
             <div className="bg-white text-black p-6 rounded-md w-full max-w-2xl relative max-h-[90vh] overflow-y-auto">
               <button
@@ -287,18 +310,12 @@ function App() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
 
         {showSafetyScorePopup && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
             <div className="bg-white text-black p-6 rounded-md w-full max-w-4xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowSafetyScorePopup(false)}
-              >
-                &times;
-              </button>
-              <SafetyTrustScore onClose={() => setShowSafetyScorePopup(false)} />
+              <SafetyScore onClose={() => setShowSafetyScorePopup(false)} /> {/* */}
             </div>
           </div>
         )}
@@ -306,13 +323,7 @@ function App() {
         {showMoodHeatmapPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
             <div className="bg-white text-black p-6 rounded-md w-full max-w-5xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowMoodHeatmapPopup(false)}
-              >
-                &times;
-              </button>
-              <MoodHeatmap onClose={() => setShowMoodHeatmapPopup(false)} />
+              <MoodHeatmap onClose={() => setShowMoodHeatmapPopup(false)} /> {/* */}
             </div>
           </div>
         )}
@@ -320,13 +331,7 @@ function App() {
         {showCostForecasterPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
             <div className="bg-white text-black p-6 rounded-md w-full max-w-4xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowCostForecasterPopup(false)}
-              >
-                &times;
-              </button>
-              <CostForecaster onClose={() => setShowCostForecasterPopup(false)} />
+              <CostForecaster onClose={() => setShowCostForecasterPopup(false)} /> {/* */}
             </div>
           </div>
         )}
@@ -334,12 +339,6 @@ function App() {
         {showExploreWorldPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
             <div className="bg-white text-black p-6 rounded-md w-full max-w-7xl relative max-h-[90vh] overflow-y-auto">
-              <button
-                className="absolute top-2 right-3 text-2xl font-bold bg-white text-black hover:text-gray-700"
-                onClick={() => setShowExploreWorldPopup(false)}
-              >
-                &times;
-              </button>
               <ExploreWorld onClose={() => setShowExploreWorldPopup(false)} />
             </div>
           </div>
