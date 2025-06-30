@@ -1,55 +1,55 @@
-import React from 'react'; // Keep this React import
-import { useLocation, useNavigate } from 'react-router-dom'; // Combine and keep both useLocation and useNavigate
-import SmartMap from './SmartMap'; // Keep this SmartMap import
+// START OF FILE: src/components/ExploreWorld.jsx
 
+import React from 'react';
 
-function ExploreWorld() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const showBackButton = location.pathname === "/explore-world";
+function ExploreWorld({ onClose }) {
+  const popularDestinations = [
+    { name: "Kyoto, Japan", description: "Ancient temples and serene gardens.", img: "https://via.placeholder.com/150/f0e68c" },
+    { name: "Machu Picchu, Peru", description: "Incan ruins and breathtaking mountain views.", img: "https://via.placeholder.com/150/a0e68c" },
+    { name: "Santorini, Greece", description: "Iconic white-washed villages and stunning sunsets.", img: "https://via.placeholder.com/150/8cb2e6" },
+  ];
 
   return (
-    <div className="explore-world-container">
-      {showBackButton && (
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-4 text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
-        >
-          ← Back to Home
-        </button>
-      )}
+    <div className="p-6 relative"> {/* Added relative for the absolute close button */}
+      {/* Close button for the popup */}
+      <button
+        className="absolute top-2 right-3 text-2xl font-bold text-gray-700 hover:text-gray-900"
+        onClick={onClose}
+      >
+        &times;
+      </button>
 
-      <h2 className="explore-world-title">Explore the World</h2>
-      <div className="explore-world-map">
-        <SmartMap />
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">Explore The World</h2>
+      <p className="text-gray-600 mb-8">
+        Discover top destinations for digital nomads based on various criteria.
+      </p>
+
+      <div className="bg-gray-50 p-6 rounded-lg shadow-inner">
+        <h3 className="text-xl font-semibold text-gray-700 mb-4">Find Your Next Adventure</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {popularDestinations.map((dest, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+              <img src={dest.img} alt={dest.name} className="w-full h-32 object-cover" />
+              <div className="p-4">
+                <h4 className="font-semibold text-lg text-gray-800">{dest.name}</h4>
+                <p className="text-sm text-gray-600 mt-1">{dest.description}</p>
+                <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded">
+                  View Details
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-6 text-center">
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Browse All Destinations
+          </button>
+        </div>
       </div>
-
-      <style>{`
-        .explore-world-container {
-          background-color: white;
-          color: black;
-          border-radius: 1rem;
-          padding: 1.5rem;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          width: 80%;
-          margin: auto;
-        }
-
-        .explore-world-title {
-          font-size: 2.5rem;
-          font-weight: 500;
-          margin-bottom: 0.5rem;
-        }
-
-        .explore-world-map {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 600px; /* Adjust height as needed */
-        }
-      `}</style>
     </div>
   );
 }
 
-export default React.memo(ExploreWorld); // Keep React.memo
+export default ExploreWorld;
+
+// END OF FILE: src/components/ExploreWorld.jsx

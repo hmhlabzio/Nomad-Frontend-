@@ -3,13 +3,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function SparkHeader({ onContactClick, onBrowseClick }) {
+function SparkHeader({ onContactClick, onBrowseClick }) { // onBrowseClick is still a prop, but not used now
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    // Header is now fully transparent to show the background image.
-    // Removed fixed positioning as it's now part of the banner's flow.
-    <header className="w-full z-10 py-4"> 
+    <header className="w-full z-10 py-4">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-10 flex justify-between items-center h-16">
 
         {/* Logo - Navigates to Home */}
@@ -25,16 +23,10 @@ function SparkHeader({ onContactClick, onBrowseClick }) {
 
         {/* Navigation - Desktop */}
         <nav className="hidden md:flex space-x-8 items-center">
-          {/* Changed text colors to white for better contrast on the dark image */}
           <Link to="/" className="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">
             Home
           </Link>
-          <a
-            onClick={onBrowseClick}
-            className="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium cursor-pointer"
-          >
-            Browse Countries
-          </a>
+         
           <Link to="/about-us" className="text-white hover:text-gray-300 px-3 py-2 text-sm font-medium">
             About
           </Link>
@@ -57,7 +49,6 @@ function SparkHeader({ onContactClick, onBrowseClick }) {
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            // Adjusted colors for mobile button for visibility on dark background
             className="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-black focus:outline-none"
           >
             <span className="sr-only">Open main menu</span>
@@ -76,17 +67,10 @@ function SparkHeader({ onContactClick, onBrowseClick }) {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        // Changed mobile menu background to be semi-transparent black for better contrast
         <div className="md:hidden bg-black bg-opacity-80 shadow-lg">
           <div className="px-4 pt-2 pb-3 space-y-1">
-            {/* Changed text colors for mobile menu items */}
             <Link to="/" className="block px-3 py-2 text-white hover:text-blue-200">Home</Link>
-            <a
-              onClick={onBrowseClick}
-              className="block px-3 py-2 text-white hover:text-blue-200 cursor-pointer"
-            >
-              Browse Countries
-            </a>
+            
             <Link to="/about-us" className="block px-3 py-2 text-white hover:text-blue-200">About</Link>
             <a
               onClick={onContactClick}
