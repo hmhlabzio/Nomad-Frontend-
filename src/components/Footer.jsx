@@ -9,7 +9,7 @@ function Footer({ onContactClick, onSafetyScoreClick, onMoodHeatmapClick, onCost
   return (
     <footer className="bg-gray-900 text-gray-300 py-10 px-4 md:px-10 lg:px-20 mt-8">
       <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {/* Company Info */}
+       
         <div>
           <h3 className="text-xl font-bold text-white mb-4">NomadNetwork</h3>
           <p className="text-sm">
