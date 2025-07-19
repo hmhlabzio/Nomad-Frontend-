@@ -8,7 +8,6 @@ export const fetchPlaces = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
     });
 
     if (!res.ok) {
