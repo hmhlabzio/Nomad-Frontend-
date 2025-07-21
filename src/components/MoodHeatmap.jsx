@@ -1,14 +1,28 @@
-import { useState, useEffect } from "react";
 import moodJson from "../../public/moodHeatmap.json"; // Adjust as needed
+import { useState, useEffect } from "react";
 
 function MoodHeatmap() {
   const [filter, setFilter] = useState("Weekly");
   const [moodData, setMoodData] = useState({ Weekly: [], Monthly: [] });
   const [page, setPage] = useState(0);
-  const itemsPerPage = 8;
+  const [itemsPerPage, setItemsPerPage] = useState(8); // Responsive items per page
 
   useEffect(() => {
     setMoodData(moodJson);
+  }, []);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(4); // 2 cols × 3 rows on mobile
+      } else {
+        setItemsPerPage(8); // 4 cols × 2 rows on larger screens
+      }
+    };
+
+    updateItemsPerPage(); // initial
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
   const data = moodData[filter] || [];
@@ -20,7 +34,7 @@ function MoodHeatmap() {
   const visibleCards = data.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage);
 
   return (
-    <div className="w-full h-full overflow-hidden text-gray-800 px-4 sm:px-4">
+    <div className="w-full min-h-screen text-gray-800 px-2 sm:px-4">
       {/* Title + View Select in Same Row */}
       <div className="sticky top-0 bg-white z-20 flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 gap-2">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
@@ -48,15 +62,14 @@ function MoodHeatmap() {
         Real-time sentiment analysis of digital nomad communities.
       </p>
 
-
       {/* Carousel Grid */}
       <div className="relative">
         {/* Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 transition-all duration-300">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 transition-all duration-300">
           {visibleCards.map((city, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-4 sm:p-5 shadow border border-gray-200"
+              className="bg-white rounded-lg p-4 sm:p-5 shadow border border-gray-200 w-full max-w-[95%] mx-auto"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800">{city.city}</h3>
@@ -101,20 +114,21 @@ function MoodHeatmap() {
         </div>
 
         {/* Navigation */}
-        <div className="flex justify-between mt-4 mb-2">
+        <div className="flex justify-between mt-4 mb-8 sm:mb-6">
           <button
             onClick={prevPage}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="text-sm px-3 py-1 sm:px-4 sm:py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
             ← Previous
           </button>
           <button
             onClick={nextPage}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="text-sm px-3 py-1 sm:px-4 sm:py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >
             Next →
           </button>
         </div>
+
       </div>
     </div>
   );

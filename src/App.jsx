@@ -186,24 +186,24 @@ function App() {
 
 
        {showMoodHeatmapPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-          <div className="relative w-full max-w-6xl h-[70vh] bg-white text-black rounded-md shadow-lg overflow-hidden">
+      <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
+        <div className="relative w-full max-w-6xl h-[70vh] bg-white mt-16 text-black rounded-md shadow-lg overflow-hidden">
 
-            {/* Close button */}
-            <button
-              className="absolute top-6 left-6 text-black bg-white border border-gray-300 px-4 py-2 rounded hover:bg-gray-100"
-              onClick={() => setShowMoodHeatmapPopup(false)}
-            >
-              ← Back
-            </button>
+          {/* Close button */}
+          <button
+            className="absolute top-6 left-6 text-black bg-white border border-gray-300 px-4 py-2 rounded hover:bg-gray-100"
+            onClick={() => setShowMoodHeatmapPopup(false)}
+          >
+            ← Back
+          </button>
 
-            {/* MoodHeatmap content with vertical scroll if needed */}
-            <div className="mt-20 px-6 h-full overflow-y-auto flex flex-col justify-center items-center">
-              <MoodHeatmap />
-            </div>
+          {/* MoodHeatmap content with vertical scroll if needed */}
+          <div className="mt-20 px-6 h-full overflow-y-auto flex flex-col justify-center items-center">
+            <MoodHeatmap />
           </div>
         </div>
-      )}
+      </div>
+    )}
 
 
 
