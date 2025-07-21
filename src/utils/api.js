@@ -7,7 +7,7 @@ export const fetchPlaces = async () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-      },
+      },credentials:'include',
     });
 
     if (!res.ok) {

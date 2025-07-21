@@ -1,0 +1,744 @@
+{
+  "Weekly": [
+    {
+      "city": "Belize",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 60,
+      "change": "+4.5%",
+      "type": "up",
+      "source": "1791+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Costa Rica",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 80,
+      "change": "+2.4%",
+      "type": "up",
+      "source": "781+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "El Salvador",
+      "emoji": "\ud83d\udc9a",
+      "percentage": 93,
+      "change": "+4.5%",
+      "type": "up",
+      "source": "760+ user reports",
+      "tagline": "Positive"
+    },
+    {
+      "city": "Mexico",
+      "emoji": "\ud83d\ude10",
+      "percentage": 68,
+      "change": "+1.1%",
+      "type": "up",
+      "source": "1088+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Panama",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 88,
+      "change": "-4.3%",
+      "type": "down",
+      "source": "2135+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Argentina",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 58,
+      "change": "+0.1%",
+      "type": "up",
+      "source": "1309+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Brazil",
+      "emoji": "\ud83d\ude10",
+      "percentage": 73,
+      "change": "+3.0%",
+      "type": "up",
+      "source": "2083+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Colombia",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 95,
+      "change": "-2.9%",
+      "type": "down",
+      "source": "750+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Ecuador",
+      "emoji": "\ud83d\ude10",
+      "percentage": 75,
+      "change": "+0.3%",
+      "type": "up",
+      "source": "1629+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Peru",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 70,
+      "change": "+1.6%",
+      "type": "up",
+      "source": "1563+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Uruguay",
+      "emoji": "\ud83d\udc9a",
+      "percentage": 82,
+      "change": "-2.2%",
+      "type": "down",
+      "source": "935+ user reports",
+      "tagline": "Positive"
+    },
+    {
+      "city": "Indonesia",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 97,
+      "change": "-4.1%",
+      "type": "down",
+      "source": "1027+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Japan",
+      "emoji": "\ud83d\ude10",
+      "percentage": 80,
+      "change": "+3.5%",
+      "type": "up",
+      "source": "2043+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Kazakhstan",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 77,
+      "change": "-2.9%",
+      "type": "down",
+      "source": "1888+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Malaysia",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 76,
+      "change": "-4.1%",
+      "type": "down",
+      "source": "704+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Nepal",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 53,
+      "change": "-4.1%",
+      "type": "down",
+      "source": "1643+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Philippines",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 45,
+      "change": "-2.5%",
+      "type": "down",
+      "source": "1791+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "South Korea",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 58,
+      "change": "-3.8%",
+      "type": "down",
+      "source": "1659+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Sri Lanka",
+      "emoji": "\ud83d\ude10",
+      "percentage": 63,
+      "change": "-2.6%",
+      "type": "down",
+      "source": "1791+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Taiwan",
+      "emoji": "\ud83d\udc9a",
+      "percentage": 92,
+      "change": "+5.0%",
+      "type": "up",
+      "source": "1653+ user reports",
+      "tagline": "Positive"
+    },
+    {
+      "city": "Thailand",
+      "emoji": "\ud83d\ude10",
+      "percentage": 92,
+      "change": "+3.6%",
+      "type": "up",
+      "source": "857+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Albania",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 88,
+      "change": "+1.6%",
+      "type": "up",
+      "source": "1605+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Armenia",
+      "emoji": "\ud83d\ude10",
+      "percentage": 85,
+      "change": "+0.7%",
+      "type": "up",
+      "source": "1854+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Croatia",
+      "emoji": "\ud83d\ude10",
+      "percentage": 100,
+      "change": "+3.3%",
+      "type": "up",
+      "source": "1144+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Cyprus",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 57,
+      "change": "+4.0%",
+      "type": "up",
+      "source": "1233+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Czech Republic",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 61,
+      "change": "-3.7%",
+      "type": "down",
+      "source": "2082+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Estonia",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 55,
+      "change": "-0.7%",
+      "type": "down",
+      "source": "1755+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Georgia",
+      "emoji": "\ud83d\ude10",
+      "percentage": 80,
+      "change": "-0.9%",
+      "type": "down",
+      "source": "1748+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Greece",
+      "emoji": "\ud83d\ude10",
+      "percentage": 76,
+      "change": "+5.0%",
+      "type": "up",
+      "source": "2176+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Hungary",
+      "emoji": "\ud83d\udc9a",
+      "percentage": 92,
+      "change": "-4.6%",
+      "type": "down",
+      "source": "1343+ user reports",
+      "tagline": "Positive"
+    },
+    {
+      "city": "Iceland",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 55,
+      "change": "+3.0%",
+      "type": "up",
+      "source": "1058+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Italy",
+      "emoji": "\ud83d\ude10",
+      "percentage": 70,
+      "change": "-0.3%",
+      "type": "down",
+      "source": "760+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Latvia",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 50,
+      "change": "+3.9%",
+      "type": "up",
+      "source": "2041+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Malta",
+      "emoji": "\ud83d\ude10",
+      "percentage": 77,
+      "change": "-2.3%",
+      "type": "down",
+      "source": "1376+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Montenegro",
+      "emoji": "\ud83d\ude10",
+      "percentage": 87,
+      "change": "-1.5%",
+      "type": "down",
+      "source": "960+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Norway",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 57,
+      "change": "+3.4%",
+      "type": "up",
+      "source": "1493+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Romania",
+      "emoji": "\ud83d\ude10",
+      "percentage": 87,
+      "change": "-4.0%",
+      "type": "down",
+      "source": "1031+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Portugal",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 47,
+      "change": "+2.1%",
+      "type": "up",
+      "source": "1015+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Slovenia",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 55,
+      "change": "+3.0%",
+      "type": "up",
+      "source": "1885+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Spain",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 60,
+      "change": "-4.0%",
+      "type": "down",
+      "source": "1329+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Turkey",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 73,
+      "change": "+4.0%",
+      "type": "up",
+      "source": "1223+ user reports",
+      "tagline": "Low"
+    }
+  ],
+  "Monthly": [
+    {
+      "city": "Belize",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 62,
+      "change": "-2.5%",
+      "type": "down",
+      "source": "1102+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Costa Rica",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 73,
+      "change": "-2.4%",
+      "type": "down",
+      "source": "1749+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "El Salvador",
+      "emoji": "\ud83d\ude10",
+      "percentage": 96,
+      "change": "+0.9%",
+      "type": "up",
+      "source": "1733+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Mexico",
+      "emoji": "\ud83d\ude10",
+      "percentage": 73,
+      "change": "+3.2%",
+      "type": "up",
+      "source": "835+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Panama",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 98,
+      "change": "+4.0%",
+      "type": "up",
+      "source": "1336+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Argentina",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 83,
+      "change": "-2.5%",
+      "type": "down",
+      "source": "763+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Brazil",
+      "emoji": "\ud83d\ude10",
+      "percentage": 67,
+      "change": "-4.3%",
+      "type": "down",
+      "source": "917+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Colombia",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 61,
+      "change": "-0.9%",
+      "type": "down",
+      "source": "1582+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Ecuador",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 82,
+      "change": "-4.2%",
+      "type": "down",
+      "source": "1546+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Peru",
+      "emoji": "\ud83d\ude10",
+      "percentage": 71,
+      "change": "+3.4%",
+      "type": "up",
+      "source": "1232+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Uruguay",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 50,
+      "change": "-3.4%",
+      "type": "down",
+      "source": "858+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Indonesia",
+      "emoji": "\ud83d\ude10",
+      "percentage": 67,
+      "change": "-4.8%",
+      "type": "down",
+      "source": "1003+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Japan",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 58,
+      "change": "-3.4%",
+      "type": "down",
+      "source": "1803+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Kazakhstan",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 46,
+      "change": "-2.9%",
+      "type": "down",
+      "source": "1239+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Malaysia",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 58,
+      "change": "+1.5%",
+      "type": "up",
+      "source": "1938+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Nepal",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 85,
+      "change": "+1.2%",
+      "type": "up",
+      "source": "1620+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Philippines",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 57,
+      "change": "-4.0%",
+      "type": "down",
+      "source": "760+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "South Korea",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 97,
+      "change": "+3.6%",
+      "type": "up",
+      "source": "1837+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Sri Lanka",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 55,
+      "change": "+2.8%",
+      "type": "up",
+      "source": "1481+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Taiwan",
+      "emoji": "\ud83d\ude10",
+      "percentage": 76,
+      "change": "-1.0%",
+      "type": "down",
+      "source": "1305+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Thailand",
+      "emoji": "\ud83d\ude10",
+      "percentage": 63,
+      "change": "+0.8%",
+      "type": "up",
+      "source": "1530+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Albania",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 67,
+      "change": "-3.9%",
+      "type": "down",
+      "source": "1192+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Armenia",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 48,
+      "change": "-2.3%",
+      "type": "down",
+      "source": "1552+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Croatia",
+      "emoji": "\ud83d\ude10",
+      "percentage": 66,
+      "change": "+3.2%",
+      "type": "up",
+      "source": "934+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Cyprus",
+      "emoji": "\ud83d\ude1e",
+      "percentage": 50,
+      "change": "+1.2%",
+      "type": "up",
+      "source": "1937+ user reports",
+      "tagline": "Negative"
+    },
+    {
+      "city": "Czech Republic",
+      "emoji": "\ud83d\udc9a",
+      "percentage": 93,
+      "change": "-0.2%",
+      "type": "down",
+      "source": "800+ user reports",
+      "tagline": "Positive"
+    },
+    {
+      "city": "Estonia",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 82,
+      "change": "+1.7%",
+      "type": "up",
+      "source": "1384+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Georgia",
+      "emoji": "\ud83d\ude10",
+      "percentage": 80,
+      "change": "+0.6%",
+      "type": "up",
+      "source": "1885+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Greece",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 58,
+      "change": "+2.4%",
+      "type": "up",
+      "source": "1810+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Hungary",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 52,
+      "change": "-3.8%",
+      "type": "down",
+      "source": "748+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Iceland",
+      "emoji": "\ud83d\udc9a",
+      "percentage": 86,
+      "change": "-0.7%",
+      "type": "down",
+      "source": "1355+ user reports",
+      "tagline": "Positive"
+    },
+    {
+      "city": "Italy",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 52,
+      "change": "+0.5%",
+      "type": "up",
+      "source": "1998+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Latvia",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 80,
+      "change": "+4.5%",
+      "type": "up",
+      "source": "1289+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Malta",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 61,
+      "change": "+3.6%",
+      "type": "up",
+      "source": "1299+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Montenegro",
+      "emoji": "\ud83d\ude10",
+      "percentage": 98,
+      "change": "-0.2%",
+      "type": "down",
+      "source": "762+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Norway",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 87,
+      "change": "-2.8%",
+      "type": "down",
+      "source": "1500+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Romania",
+      "emoji": "\ud83d\ude10",
+      "percentage": 67,
+      "change": "-4.2%",
+      "type": "down",
+      "source": "881+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Portugal",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 52,
+      "change": "+1.9%",
+      "type": "up",
+      "source": "923+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Slovenia",
+      "emoji": "\ud83d\ude1f",
+      "percentage": 60,
+      "change": "-0.9%",
+      "type": "down",
+      "source": "894+ user reports",
+      "tagline": "Low"
+    },
+    {
+      "city": "Spain",
+      "emoji": "\ud83d\ude10",
+      "percentage": 70,
+      "change": "+4.1%",
+      "type": "up",
+      "source": "1629+ user reports",
+      "tagline": "Moderate"
+    },
+    {
+      "city": "Turkey",
+      "emoji": "\ud83d\ude0d",
+      "percentage": 95,
+      "change": "-2.2%",
+      "type": "down",
+      "source": "1401+ user reports",
+      "tagline": "Very Positive"
+    }
+  ]
+}
