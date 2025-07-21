@@ -5,7 +5,6 @@ export const fetchPlaces = async () => {
   try {
     const res = await fetch(apiUrl, {
       method: 'GET',
-      // ✅ No need to set headers for GET unless required
     });
 
     const data = await res.json();
