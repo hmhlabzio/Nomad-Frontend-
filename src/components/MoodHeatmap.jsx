@@ -1,4 +1,4 @@
-import moodJson from "../../public/moodHeatmap.json"; // Adjust as needed
+import moodJson from "../../moodHeatmap.json"; // Adjust as needed
 import { useState, useEffect } from "react";
 
 function MoodHeatmap() {

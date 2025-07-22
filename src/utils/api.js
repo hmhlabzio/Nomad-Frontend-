@@ -1,5 +1,5 @@
 export const fetchPlaces = async () => {
-  const apiUrl = `${import.meta.env.VITE_PAYLOAD_API_URL}/api/places?limit=100`;
+  const apiUrl = `${import.meta.env.VITE_PAYLOAD_API_URL}/api/places?limit=100&depth=1`;
   console.log("Fetching from:", apiUrl);
 
   try {

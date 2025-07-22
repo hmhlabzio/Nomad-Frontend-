@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fetchPlaces } from '../utils/api';
 import './CityPreview.css';
+import fbImage from '../assets/fallback.webp';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCcVisa } from '@fortawesome/free-brands-svg-icons';
 
@@ -57,6 +59,7 @@ function CityPreview() {
     if (value >= 50) return { level: 'Poor', color: '#ef4444' };
     return { level: 'Poor', color: '#ef4444' };
   };
+  
 
   return (
     <>
@@ -104,17 +107,17 @@ function CityPreview() {
         {/* <h2 className="section-title">Popular Destinations</h2> */}
         <div className="city-grid">
           {filteredPlaces.map((city) => (
+            
             <div key={city.id} className="city-card">
               <div className="city-image-container">
-               <img
-                  src={city.image && typeof city.image === 'object' && city.image.url
-                    ? city.image.url
-                    : '/fallback.webp'
-                  }                  
-                  alt={city.country_name}
-                  className="city-image"
-                  loading="lazy"
-                />
+              <img
+                src={city.image ? city.image : fbImage }
+                alt={city.country_name}
+                className="city-image"
+                loading="lazy"
+              />
+
+
 
                 <div className="overlay-top">
                   <h3 className="overlay-city-name">{city.countryName}</h3>
