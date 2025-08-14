@@ -1,8 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import React from 'react';
 import SparHeader from '../components/SparkHeader';
 import { fetchPlaces } from '../utils/api';
 import './CityDetails.css';
+// import bg from '../assets/bg.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
@@ -84,18 +86,17 @@ function CityDetailsPage() {
         email: formData.email,
         country: formData.country,
         message: formData.message,
-        cityId: city?.id || '',
       },
       import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      
     );
 
     alert('Inquiry sent successfully!');
     setFormData({
       name: '',
       email: '',
-      country: '',
+      country: city.countryName ,
       message: '',
-      cityId: city?.id || '',
     });
   } catch (error) {
     console.error('Email send failed:', error);
@@ -103,6 +104,8 @@ function CityDetailsPage() {
   } finally {
     setIsLoading(false);
   }
+  console.log("Sending country:", formData.country);
+
 };
 
 
@@ -147,163 +150,216 @@ function CityDetailsPage() {
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1>{city.countryName}</h1>
-          <p>{city.visaType}</p>
-        </div>
-      </div>
-      
-
-
-      {/* Stats Section */}
-      <div className="stats-grid">
-        <div className="stat-box">
-          <div className="icon">⏳</div>
-          <h3>{city.visaDuration} </h3>
-          <p>Visa Duration</p>
-        </div>
-        <div className="stat-box">
-          <div className="icon">📶</div>
-          <h3>{city.internetSpeed} Mbps</h3>
-          <p>Internet Speed</p>
-        </div>
-        <div className="stat-box">
-          <div className="icon">🌡️</div>
-          <h3>{city.climate}</h3>
-          <p>Avg. Temperature</p>
-        </div>
-        <div className="stat-box">
-          <div className="icon">💸</div>
-          <h3>{city.visaFees} </h3>
-          <p>Visa Application Fees</p>
+          <p>{city.country_description}</p>
         </div>
       </div>
 
-      {/* Quality Section */}
-      <div className="quality-cont">
-        <h2>Living Costs & Quality</h2>
-        <div className="quality-grid">
-          <div className="cost-and-stats">
-            <div className="monthly-cost">
-              <h3>${city.monthlyCost}<span>/month</span></h3>
-              <p>Estimated monthly cost for nomads</p>
-            </div>
-            <div className="quick-stats">
-              <div className="stat"><span>🌡</span>{city.climate}</div>
-              <div className="stat"><span>🌿</span>{city.aqi} AQI</div>
-              <div className="stat"><span>🛡</span>{getRatingLevel(city.safetyScore).level} Safety</div>
-            </div>
-          </div>
+     <div className="majorcity-section">
+      <h2>Major Cities</h2>
+      <div className="majorcity-grid">
+        <div className="majorcity-card">
+          <h3>{city.city_one}</h3>
+          <p>{city.city_oneinfo}</p>
+        </div>
+        <div className="majorcity-card">
+          <h3>{city.city_two}</h3>
+          <p>{city.city_twoinfo}</p>
+        </div>
+      </div>
+    </div>      
 
-          <div className="rating-section">
-            {[
-              { label: '💰 Cost', value: city.cost, color: '#f97316' },
-              { label: '📶 Internet', value: city.internetSpeed, color: '#3b82f6' },
-              { label: '🛡 Safety', value: city.safetyScore, color: '#22c55e' },
-              { label: '❤️ Liked', value: city.overallScore, color: '#ef4444' },
-            ].map(({ label, value, color }) => (
-              <div className="rating-row" key={label}>
-                <div className="rating-label">{label}</div>
-                <div className="rating-bar">
-                  <div className="fill" style={{ width: `${value}%`, backgroundColor: color }}></div>
+
+      <div className="main-layout">
+          {/* Left Side - Living Costs & Quality */}
+          <div className="quality-cont" >
+            <h2>Living Costs & Quality</h2>
+            <div className="quality-grid">
+              <div className="cost-and-stats">
+                <div className="monthly-cost">
+                  <h3>${city.monthlyCost}<span>/month</span></h3>
+                  <p>Estimated monthly cost for nomads</p>
+                </div>
+                <div className="quick-stats">
+                  <div className="stat"><span>🌡</span>{city.climate}</div>
+                  <div className="stat"><span>🌿</span>{city.aqi} AQI</div>
+                  <div className="stat"><span>🛡</span>{getRatingLevel(city.safetyScore).level} Safety</div>
                 </div>
               </div>
-            ))}
+
+              <div className="rating-section">
+                {[
+                  { label: '💰 Cost', value: city.cost, color: '#f97316' },
+                  { label: '📶 Internet', value: city.internetSpeed, color: '#3b82f6' },
+                  { label: '🛡 Safety', value: city.safetyScore, color: '#22c55e' },
+                  { label: '❤️ Liked', value: city.overallScore, color: '#ef4444' },
+                ].map(({ label, value, color }) => (
+                  <div className="rating-row" key={label}>
+                    <div className="rating-label">{label}</div>
+                    <div className="rating-bar">
+                      <div className="fill" style={{ width: `${value}%`, backgroundColor: color }}></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Stats */}
+          <div className="stats-column">
+            <div className="stat-box">
+              <div className="icon">⏳</div>
+              <h3>{city.visaDuration}</h3>
+              <p>Visa Duration</p>
+            </div>
+            <div className="stat-box">
+              <div className="icon">📶</div>
+              <h3>{city.internetSpeed} Mbps</h3>
+              <p>Internet Speed</p>
+            </div>
+            <div className="stat-box">
+              <div className="icon">🌡️</div>
+              <h3>{city.climate}</h3>
+              <p>Avg. Temperature</p>
+            </div>
+            <div className="stat-box">
+              <div className="icon">💸</div>
+              <h3>{city.visaFees}</h3>
+              <p>Visa Application Fees</p>
+            </div>
           </div>
         </div>
-      </div>
+
 
       {/* Visa Overview Section */}
       <div className="visa-overview">
-        <h2>Visa Program Overview</h2>
-        <div className="visa-content">
-          <div className="visa-section">
-            <h4 className="section-title">✅ Requirements</h4>
-            <ul>
-              <li>Minimum income: {city?.monthlyCost}</li>
-              <li>Remote work proof</li>
-              <li>Health insurance</li>
-              <li>Accommodation booking</li>
-            </ul>
-          </div>
-          <div className="visa-section">
-            <h4 className="section-title">👤 Benefits</h4>
-            <ul>
-              <li>Tropical paradise</li>
-              <li>Strong nomad community</li>
-              <li>Affordable living</li>
-              <li>Surf and yoga culture</li>
-            </ul>
-          </div>
-        </div>
-        <div className="visa-bottom-stats">
-          <div className="stat-block">
-            <h5>Processing Time</h5>
-            <p>7 days</p>
-          </div>
-          <div className="stat-block">
-            <h5>Income Requirement</h5>
-            <p>{city?.monthlyCost}</p>
-          </div>
-          <div className="stat-block">
-            <h5>Application Fee</h5>
-            <p>$35</p>
-          </div>
-        </div>
-      </div>
 
-      {/* About Section */}
-      <div className="city-about">
-        <h2 className="city-que">Why {city?.countryName} is Perfect for Digital Nomads</h2>
-        <p className="city-ans1">{city?.countryName} offers the perfect combination of tropical paradise, strong nomad community, and affordable living.</p>
-        <p className="city-ans2">With its beautiful beaches, vibrant co-working scene, and incredibly welcoming community, {city?.name} has become the ultimate destination for lifestyle-focused digital nomads.</p>
-      </div>
+          <div className="visa-layout">
+            {/* Left - Requirements */}
+            <div className="visa-left">
+              <h2>Visa Program Overview</h2>
 
-      {/* Inquiry Form Section */}
-      <div className="inquiry-form-wrapper">
-        <div className="inquiry-form">
-          <h2>Interested in {city.countryName}?</h2>
-          <p>Get personalized guidance on the visa application process and living in {city.name}.</p>
-        
-          <form onSubmit={handleSubmit}>
-            <div className="input-row">
-              <label>
-                Your Name:
-                <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-              </label>
-              <label>
-                Your Email:
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-              </label>
+              <div className="visa-section">
+                <h4 className="section-title">✅ Requirements</h4>
+                <ul>
+                  {city.specialRequirements
+                    .split("\n")
+                    .map(req => req.replace(/^-+\s*/, "").trim())
+                    .filter(req => req.length > 0)
+                    .map((req, index) => (
+                      <li key={index}>{req}</li>
+                    ))}
+                </ul>
+              </div>
             </div>
 
-            <label>
-              Current Country:
-              <select name="country" value={formData.country} onChange={handleChange} required>
-                <option value="">Select your current country</option>
-                <option value="USA">USA</option>
-                <option value="Canada">Canada</option>
-                <option value="UK">UK</option>
-              </select>
-            </label>
+            {/* Right - Why Choose + Stats */}
+            <div className="visa-right">
+              <div className="why-choose">
+                {city.why_choose
+                  // remove emojis
+                  .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
+                  // start from "Live" (case-insensitive)
+                  .substring(city.why_choose.search(/live/i))
+                  // normalize multiple spaces
+                  .replace(/\s+/g, " ")
+                  // split sentences by '.' and trim each
+                  .split('.')
+                  .map((sentence, index) =>
+                    sentence.trim() ? <div key={index}>{sentence.trim()}.</div> : null
+                  )}
+              </div>
 
-            <label>
-              Message:
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder="Tell us about your situation and what information you need..."
-              ></textarea>
-            </label>
-
-            <button type="submit" disabled={isLoading}>
-              <FontAwesomeIcon icon={faPaperPlane} style={{ marginRight: '8px' }} />
-              {isLoading ? 'Sending...' : 'Send Inquiry'}
-            </button>
-
-          </form>
+              <div className="visa-bottom-stats">
+                <div className="stat-block">
+                  <h5>Processing Time</h5>
+                  <p>7 days</p>
+                </div>
+                <div className="stat-block">
+                  <h5>Income Requirement</h5>
+                  <p>{city?.monthlyCost}</p>
+                </div>
+                <div className="stat-block">
+                  <h5>Application Fee</h5>
+                  <p>{city.visaFees}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+
+
+
+      {/* About Section */}
+<div className="about-inquiry-container">
+  <div className="city-about">
+    <h2 className="city-que">
+      Why {city?.countryName} is Perfect for Digital Nomads
+    </h2>
+      <p className="city-ans1">
+        {city.why_choose
+          ?.replace(/\s+/g, ' ') // clean extra spaces
+          .split(/\.|\n|-/) // split on period OR line break
+          .filter(sentence => sentence.trim() !== '')
+          .map((sentence, index) => (
+            <React.Fragment key={index}>
+              {sentence.trim()}.
+              <br />
+            </React.Fragment>
+          ))}
+      </p>
+
+  </div>
+
+  <div className="inquiry-form">
+    <h2>Interested in {city.countryName}?</h2>
+    <p>
+      Get personalized guidance on the visa application process and living in {" "}
+      {city.countryName}.
+    </p>
+
+    <form onSubmit={handleSubmit}>
+  <div className="input-row">
+    <label>
+      Your Name:
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
+    </label>
+    <label>
+      Your Email:
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+    </label>
+  </div>
+
+  <label>
+    Message:
+    <textarea
+      name="message"
+      value={formData.message}
+      onChange={handleChange}
+      required
+      placeholder="Tell us about your situation and what information you need..."
+    ></textarea>
+  </label>
+
+  <button type="submit" disabled={isLoading}>
+    <FontAwesomeIcon icon={faPaperPlane} style={{ marginRight: "8px" }} />
+    {isLoading ? "Sending..." : "Send Inquiry"}
+  </button>
+</form>
+
+  </div>
+</div>
     </div>
   );
 }

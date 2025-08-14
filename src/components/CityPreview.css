@@ -45,6 +45,7 @@
   background-color: #c7d2fe;
 }
 
+
 @media (max-width: 768px) {
   .filter-toolbar {
     flex-direction: column;

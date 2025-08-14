@@ -201,7 +201,7 @@ const LifestyleMeter = () => {
       },
       {
         metric: 'Cost',
-        score: 100 - raw.costPerDay, // Lower daily cost → higher score
+        score: raw.costPerDay, // Lower daily cost → higher score
         icon: '💰',
         color: '#2ECC71',
         basis: `Estimated monthly: ${raw.monthlyCost}`,

@@ -5,7 +5,6 @@ import fbImage from '../assets/fallback.webp';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCcVisa } from '@fortawesome/free-brands-svg-icons';
-
 import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -13,37 +12,36 @@ import { useNavigate } from 'react-router-dom';
 function CityPreview() {
   const [places, setPlaces] = useState([]);
   const [likedCities, setLikedCities] = useState({});
-  const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_PAYLOAD_API_URL;
   const [searchTerm, setSearchTerm] = useState('');
   const [visaFilter, setVisaFilter] = useState('');
   const [regionFilter, setRegionFilter] = useState('');
+  const [sortOrder, setSortOrder] = useState('');
+  const navigate = useNavigate();
 
-  const filteredPlaces = places.filter((place) => {
-  const matchesSearch = place.countryName?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
-
-  const matchesVisa = visaFilter ? place.visaDuration?.includes(visaFilter) : true;
-  const matchesRegion = regionFilter ? place.continent?.toLowerCase() === regionFilter.toLowerCase() : true;
-  
-
-  return matchesSearch && matchesVisa && matchesRegion;
-});
-
-
-
+  const filteredPlaces = places
+    .filter((place) => {
+      const matchesSearch = place.countryName?.toLowerCase().includes(searchTerm.toLowerCase()) || false;
+      const matchesVisa = visaFilter ? place.visaDuration?.includes(visaFilter) : true;
+      const matchesRegion = regionFilter ? place.continent?.toLowerCase() === regionFilter.toLowerCase() : true;
+      return matchesSearch && matchesVisa && matchesRegion;
+    })
+    .sort((a, b) => {
+      if (sortOrder === 'lowToHigh') return (a.monthlyCost || 0) - (b.monthlyCost || 0);
+      if (sortOrder === 'highToLow') return (b.monthlyCost || 0) - (a.monthlyCost || 0);
+      return 0;
+    });
 
   useEffect(() => {
-  const loadData = async () => {
-    try {
-      const data = await fetchPlaces();
-      setPlaces(data); // 👈 directly set the array
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-  loadData();
-}, []);
-
+    const loadData = async () => {
+      try {
+        const data = await fetchPlaces();
+        setPlaces(data);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    loadData();
+  }, []);
 
   const toggleLike = (cityId) => {
     setLikedCities(prev => ({
@@ -59,71 +57,87 @@ function CityPreview() {
     if (value >= 50) return { level: 'Poor', color: '#ef4444' };
     return { level: 'Poor', color: '#ef4444' };
   };
-  
 
   return (
     <>
       <section className="filter-section">
         <div className="filter-toolbar" style={{ width: '100%' }}>
           <input
-                type="text"
-                placeholder="Search by Country..."
-                className="filter-search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+            type="text"
+            placeholder="Search by Country..."
+            className="filter-search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
 
-              <select className="filter-dropdown" value={regionFilter} onChange={(e) => setRegionFilter(e.target.value)}>
-                <option value="">All Regions</option>
-                <option>Europe</option>
-                <option>Asia</option>
-                <option>Central America</option>
-                <option>South America</option>
-              </select>
+          <select
+            className="filter-dropdown"
+            value={regionFilter}
+            onChange={(e) => setRegionFilter(e.target.value)}
+          >
+            <option value="">All Regions</option>
+            <option>Europe</option>
+            <option>Asia</option>
+            <option>Central America</option>
+            <option>South America</option>
+          </select>
 
-              <select className="filter-dropdown" value={visaFilter} onChange={(e) => setVisaFilter(e.target.value)}>
-                <option value="">All Visa Durations</option>
-                <option>3 Months</option>
-                <option>6 Months</option>
-                <option>1 Year</option>
-                <option>1 Year 6 Months</option>
-              </select>
+          <select
+            className="filter-dropdown"
+            value={visaFilter}
+            onChange={(e) => setVisaFilter(e.target.value)}
+          >
+            <option value="">All Visa Durations</option>
+            <option>3 Months</option>
+            <option>6 Months</option>
+            <option>1 Year</option>
+            <option>1 Year 6 Months</option>
+          </select>
 
-              <button
-                className="filter-button reset"
-                onClick={() => {
-                  setSearchTerm('');
-                  setVisaFilter('');
-                  setRegionFilter('');
-                }}
-              >
-                Reset
-              </button>
-          </div>
+          <select
+            className="filter-dropdown"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="">Sort by Cost</option>
+            <option value="lowToHigh">Low to High</option>
+            <option value="highToLow">High to Low</option>
+          </select>
+
+          <button
+            className="filter-button reset"
+            onClick={() => {
+              setSearchTerm('');
+              setVisaFilter('');
+              setRegionFilter('');
+              setSortOrder('');
+            }}
+          >
+            Reset
+          </button>
+        </div>
       </section>
 
-
       <div className="container" id="popular-cities">
-        {/* <h2 className="section-title">Popular Destinations</h2> */}
         <div className="city-grid">
           {filteredPlaces.map((city) => (
-            
             <div key={city.id} className="city-card">
               <div className="city-image-container">
-              <img
-                src={city.image ? city.image : fbImage }
-                alt={city.country_name}
-                className="city-image"
-                loading="lazy"
-              />
-
-
-
+                <img
+                  src={city.image ? city.image : fbImage}
+                  srcSet={`
+                    ${(city.image ? city.image : fbImage)}?w=400 400w,
+                    ${(city.image ? city.image : fbImage)}?w=800 800w
+                  `}
+                  sizes="(max-width: 600px) 400px, 800px"
+                  alt={city.countryName}
+                  className="city-image"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="overlay-top">
                   <h3 className="overlay-city-name">{city.countryName}</h3>
-                  {/* <p className="overlay-country">{city.country}</p> */}
                 </div>
-                {/* <div className="internet-speed">{city.internet || '25'} Mbps</div> */}
               </div>
 
               <div className="city-info">
@@ -131,10 +145,9 @@ function CityPreview() {
                   <span className="price">${city.monthlyCost}/monthly</span>
                   <span className="temp">{city.climate}°C</span>
                   <span className="aqi">
-                   {city.visaDuration}
-                   <FontAwesomeIcon icon={faCcVisa} className="mr-2" /> 
+                    {city.visaDuration}
+                    <FontAwesomeIcon icon={faCcVisa} className="mr-2" />
                   </span>
-                  {/* <span className="aqi">{city.aqi} AQI</span> */}
                 </div>
 
                 <div className="rating-bars">
