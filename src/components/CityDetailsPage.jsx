@@ -284,11 +284,11 @@ function CityDetailsPage() {
            <div className="visa-bottom-stats">
                 <div className="stat-block">
                   <h5>Processing Time</h5>
-                  <p>7 days</p>
+                  <p>{city?.processing_time}</p>
                 </div>
                 <div className="stat-block">
                   <h5>Income Requirement</h5>
-                  <p>{city?.monthlyCost}</p>
+                  <p>{city.minimum_incom}</p>
                 </div>
                 <div className="stat-block">
                   <h5>Application Fee</h5>
