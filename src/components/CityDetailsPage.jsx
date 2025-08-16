@@ -255,21 +255,33 @@ function CityDetailsPage() {
             {/* Right - Why Choose + Stats */}
             <div className="visa-right">
               <div className="why-choose">
-                {city.why_choose
-                  // remove emojis
-                  .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, "")
-                  // start from "Live" (case-insensitive)
-                  .substring(city.why_choose.search(/live/i))
-                  // normalize multiple spaces
-                  .replace(/\s+/g, " ")
-                  // split sentences by '.' and trim each
-                  .split('.')
-                  .map((sentence, index) =>
-                    sentence.trim() ? <div key={index}>{sentence.trim()}.</div> : null
-                  )}
+                <h3>How to Apply? </h3>
+                <div className="steps-text">
+                  {city.steps_apply
+                    .split('\n')
+                    .filter(line => line.trim() !== "") // ignore empty lines
+                    .map((line, index) => {
+                      const isIndented = /^\s/.test(line); // starts with space/tab
+                      const trimmed = line.trim();
+                      
+                      return (
+                        <div
+                          key={index}
+                          style={{ marginLeft: isIndented ? '20px' : '0' }}
+                        >
+                          {isIndented ? `• ${trimmed}` : trimmed}
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
 
-              <div className="visa-bottom-stats">
+              
+            </div>
+            
+
+          </div>
+           <div className="visa-bottom-stats">
                 <div className="stat-block">
                   <h5>Processing Time</h5>
                   <p>7 days</p>
@@ -282,10 +294,9 @@ function CityDetailsPage() {
                   <h5>Application Fee</h5>
                   <p>{city.visaFees}</p>
                 </div>
-              </div>
-            </div>
-          </div>
+         </div>
         </div>
+       
 
 
 
@@ -297,16 +308,16 @@ function CityDetailsPage() {
     </h2>
       <p className="city-ans1">
         {city.why_choose
-          ?.replace(/\s+/g, ' ') // clean extra spaces
-          .split(/\.|\n|-/) // split on period OR line break
-          .filter(sentence => sentence.trim() !== '')
-          .map((sentence, index) => (
+          ?.split('\n') // split only on Enter
+          .filter(line => line.trim() !== '') // remove empty lines
+          .map((line, index) => (
             <React.Fragment key={index}>
-              {sentence.trim()}.
+              {line.trim()}
               <br />
             </React.Fragment>
           ))}
       </p>
+
 
   </div>
 

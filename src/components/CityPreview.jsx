@@ -80,6 +80,8 @@ function CityPreview() {
             <option>Asia</option>
             <option>Central America</option>
             <option>South America</option>
+            <option>Middle East</option>
+
           </select>
 
           <select
@@ -119,9 +121,12 @@ function CityPreview() {
       </section>
 
       <div className="container" id="popular-cities">
-        <div className="city-grid">
+        <div className="city-grid" >
           {filteredPlaces.map((city) => (
-            <div key={city.id} className="city-card">
+            <div key={city.id} className="city-card" onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/city/${city.id}`);
+                    }}>
               <div className="city-image-container">
                 <img
                   src={city.image ? city.image : fbImage}

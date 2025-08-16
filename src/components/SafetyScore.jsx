@@ -129,19 +129,19 @@ function SafetyTrustScore() {
             <p className="hidden sm:block text-sm text-gray-600">
               {currentCityData.reason}
             </p>
-            {currentCityData.flagged > 0 && (
+            {/* {currentCityData.flagged > 0 && (
               <p className="text-red-600 font-semibold mt-2">
                 {currentCityData.flagged} recent incident(s) flagged
               </p>
-            )}
+            )} */}
           </div>
 
           {/* Right */}
-          <div className="bg-white rounded-2xl p-4 shadow-md border border-gray-200 w-full md:w-2/3 text-left">
+          <div className="bg-white rounded-2xl p-4 shadow-md border border-gray-200 w-full md:w-2/3 flex flex-col items-center justify-center">
             <h3 className="text-lg font-semibold text-gray-800 ">
               Recent Safety News & Updates
             </h3>
-            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+            <ul className="list-disc list-inside text-sm text-gray-700 space-y-1 mt-4">
               {currentCityData.news.map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}

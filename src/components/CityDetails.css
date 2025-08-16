@@ -391,6 +391,7 @@ body, .city-details-container {
 }
 
 .why-choose {
+  margin-top: 40px;
   background: linear-gradient(135deg, #6b5bff, #5e35b1);
   line-height: 1.6;
   color: #fff;
@@ -398,14 +399,28 @@ body, .city-details-container {
   padding-block: 20px;
   border-radius: 10px;
 }
+.why-choose h3{
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+.steps-text {
+  padding-block: 10px;
+  white-space: pre-line; /* keeps newlines from your string */
+}
 
 .visa-bottom-stats {
   display: flex;
-  flex-direction: column; /* stack vertically */
+  flex-direction: row; /* stack vertically */
   gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  margin-inline: 40px;
+  margin-top: 40px;
 }
 
 .stat-block {
+  width: 800px;
   background: linear-gradient(
       rgba(0, 0, 0, 0.6), 
       rgba(0, 0, 0, 0.3)
@@ -587,6 +602,12 @@ body, .city-details-container {
   /* Visa layout stack */
   .visa-layout {
     flex-direction: column;
+  }
+  .visa-bottom-stats{
+    flex-direction: column;
+  }
+  .visa-bottom-stats .stat-block {
+    width: 130%;
   }
 
   /* About + Inquiry stack */
