@@ -1,13 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import SparkHeader from '../components/SparkHeader';
 
 function CommunityPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleJoinClick = () => {
-    navigate('/community-forum'); // Update this route as needed
-  };
+  // const handleJoinClick = () => {
+  //   navigate('/community-forum'); // Update this route as needed
+  // };
 
   return (
     <>
@@ -100,12 +100,12 @@ function CommunityPage() {
 
         {/* CTA */}
         <div className="text-center py-8 px-4">
-          <button
+          {/* <button
             onClick={handleJoinClick}
             className="bg-black hover:bg-gray-900 text-white font-semibold text-lg py-3 px-8 rounded-full shadow-lg transition duration-300"
           >
             Join the Conversation
-          </button>
+          </button> */}
         </div>
       </div>
     </>
