@@ -76,12 +76,12 @@ function BlogPage() {
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">{featuredArticle.title}</h1>
           <p className="text-lg mb-6">{featuredArticle.excerpt}</p>
-          <Link
+          {/* <Link
             to={featuredArticle.link}
             className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium transition"
           >
             Read More →
-          </Link>
+          </Link> */}
         </div>
       </div>
 

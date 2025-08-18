@@ -417,6 +417,7 @@
 
 .details-btn {
   background-color: #6366f1;
+  width: 100%;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;

@@ -3,15 +3,16 @@ import { fetchPlaces } from '../utils/api';
 import './CityPreview.css';
 import fbImage from '../assets/fallback.webp';
 
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCcVisa } from '@fortawesome/free-brands-svg-icons';
-import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
+// import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
+// import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 function CityPreview() {
   const [places, setPlaces] = useState([]);
-  const [likedCities, setLikedCities] = useState({});
+  // const [likedCities, setLikedCities] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
   const [visaFilter, setVisaFilter] = useState('');
   const [regionFilter, setRegionFilter] = useState('');
@@ -43,12 +44,12 @@ function CityPreview() {
     loadData();
   }, []);
 
-  const toggleLike = (cityId) => {
-    setLikedCities(prev => ({
-      ...prev,
-      [cityId]: !prev[cityId],
-    }));
-  };
+  // const toggleLike = (cityId) => {
+  //   setLikedCities(prev => ({
+  //     ...prev,
+  //     [cityId]: !prev[cityId],
+  //   }));
+  // };
 
   const getRatingLevel = (value) => {
     if (value >= 80) return { level: 'Excellent', color: '#22c55e' };
@@ -182,9 +183,9 @@ function CityPreview() {
                       navigate(`/city/${city.id}`);
                     }}
                   >
-                    View Details
+                    View Details 
                   </button>
-                  <button
+                  {/* <button
                     className="like-btn"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -192,7 +193,7 @@ function CityPreview() {
                     }}
                   >
                     <FontAwesomeIcon icon={likedCities[city.id] ? fasFaHeart : farFaHeart} />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

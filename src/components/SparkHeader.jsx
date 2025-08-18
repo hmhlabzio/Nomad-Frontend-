@@ -1,9 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/NOMAD.png';
+import { useNavigate } from "react-router-dom";
+
 
 function SparkHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleExploreClick = () => {
+    navigate('/', { state: { scrollToCities: true } });
+  };
+
+  
 
   return (
     <header
@@ -31,9 +40,13 @@ function SparkHeader() {
 
         {/* CTA Button */}
         <div className="hidden md:flex">
-          <button className="bg-yellow-400 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-semibold">
+          <button
+            onClick={handleExploreClick}
+            className="bg-yellow-400 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-semibold"
+          >
             Get Started
           </button>
+
         </div>
 
         {/* Mobile Menu Toggle */}

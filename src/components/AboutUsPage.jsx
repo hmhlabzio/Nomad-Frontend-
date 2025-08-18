@@ -190,7 +190,7 @@ function AboutUsPage() {
               <p className="text-gray-700 text-sm">Whether you're a seasoned traveler or just starting to plan your first work-abroad adventure, we're here to guide you every step of the way.</p>
 
               <button
-                onClick={() => window.location.href = '/signup'}
+                onClick={() => window.location.href = '/contact'}
                 className="mt-4 inline-block px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-full font-medium transition-all"
               >
                 Join Member
